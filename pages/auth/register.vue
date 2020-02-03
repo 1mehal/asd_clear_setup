@@ -34,7 +34,9 @@
             <el-alert :title="error" type="error" show-icon> </el-alert>
           </el-form-item>
           <el-form-item>
-            <el-button @click="onSubmit" type="primary">Create</el-button>
+            <el-button @click="onSubmit" type="primary">
+              Register
+            </el-button>
             <el-button @click="onCancel">Cancel</el-button>
           </el-form-item>
         </el-form>

@@ -31,7 +31,7 @@ export default {
   apollo: {
     remoteGreeting: {
       query: currentUserRemoteGreeting,
-      update: (data) => !!data.currentUserRemoteGreeting.message,
+      update: (data) => data.currentUserRemoteGreeting.message,
       error(error) {
         this.error = error
       }

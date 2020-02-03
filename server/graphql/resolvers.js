@@ -15,12 +15,16 @@ const checkUserAuthorization = function(req) {
 
 const resolvers = {
   Query: {
-    async currentUserRemoteGreeting(root, {}, { req, models }) {
+    async currentUserRemoteGreeting(root, nul, { req, models }) {
       checkUserAuthorization(req)
-      let urlToCall = `http://127.0.0.1:8000/hello?token=${req.headers.authorization.split('Bearer ')[1]}`      
-      const response = await axios.get(urlToCall)
+      const urlToCall = `${process.env.REMOTE_GREETING_SERVER_URL ||
+        'http://127.0.0.1:8000/'}/hello?token=${
+        req.headers.authorization.split('Bearer ')[1]
+      }`
+      const response = (await axios.get(urlToCall)).data
+
       return {
-        message: response.data
+        message: response
       }
     },
     currentUser(root, {}, { req, models }) {

@@ -57,7 +57,6 @@ module.exports = {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    // '@nuxtjs/auth',
     '@nuxtjs/apollo'
   ],
   router: {
@@ -104,7 +103,7 @@ module.exports = {
       default: {
         // required
         // authenticationType: 'Bearer',
-        httpEndpoint: 'http://localhost:3000/graphql',
+        httpEndpoint: '/graphql',
         // optional
         // override HTTP endpoint in browser only
         browserHttpEndpoint: '/graphql',
@@ -123,12 +122,12 @@ module.exports = {
         // Use websockets for everything (no HTTP)
         // You need to pass a `wsEndpoint` for this to work
         websocketsOnly: false // Optional
-      },
-      test: {
-        httpEndpoint: 'http://localhost:5000',
-        // wsEndpoint: 'ws://localhost:5000',
-        tokenName: 'apollo-token'
-      }
+      } //,
+      // test: {
+      //   httpEndpoint: process.env.TEST_HTTP_ENDPOINT,
+      //   // wsEndpoint: 'ws://localhost:5000',
+      //   tokenName: 'apollo-token'
+      // }
       // alternative: user path to config which returns exact same config options
     }
   },
@@ -140,6 +139,6 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) { }
   }
 }
