@@ -9,7 +9,7 @@
         shadow="hover"
         header="Demonstrate remote greeting"
       >
-        <h3>{{ remoteGreeting }}</h3>
+        <h3 v-if="remoteGreeting">{{ remoteGreeting.message }}</h3>
         <el-alert v-if="error" :title="error" type="error" show-icon>
         </el-alert>
       </el-card>
@@ -31,9 +31,9 @@ export default {
   apollo: {
     remoteGreeting: {
       query: currentUserRemoteGreeting,
-      update: (data) => data.currentUserRemoteGreeting.message,
+      update: (data) => data.currentUserRemoteGreeting,
       error(error) {
-        this.error = error
+        this.error = error.message
       }
     }
   }
