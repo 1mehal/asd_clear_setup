@@ -2,12 +2,16 @@
   <el-row :gutter="20">
     <el-col :span="12" :offset="6">
       <el-card
+        v-loading="$apollo.loading"
+        element-loading-text="Loading remote greeting ..."
+        element-loading-spinner="el-icon-loading"
         class="box-card"
         shadow="hover"
         header="Demonstrate remote greeting"
       >
-        <div v-if="$apollo.loading">Loading...</div>
         <h3>{{ remoteGreeting }}</h3>
+        <el-alert v-if="error" :title="error" type="error" show-icon>
+        </el-alert>
       </el-card>
     </el-col>
   </el-row>
@@ -19,10 +23,18 @@ import currentUserRemoteGreeting from '../gql/currentUserRemoteGreeting'
 export default {
   computed: mapGetters(['currentUser']),
   auth_required: true,
+  data() {
+    return {
+      error: null
+    }
+  },
   apollo: {
     remoteGreeting: {
       query: currentUserRemoteGreeting,
-      update: (data) => data.currentUserRemoteGreeting.message
+      update: (data) => !!data.currentUserRemoteGreeting.message,
+      error(error) {
+        this.error = error
+      }
     }
   }
 }
