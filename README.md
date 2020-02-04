@@ -8,6 +8,11 @@
 # install dependencies
 $ npm run install
 
+
+# in case of errors with core-js please install core-js manually
+$ npm i -D core-js@2 @babel/runtime-corejs2
+
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 
