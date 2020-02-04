@@ -88,3 +88,5 @@ sw.*
 
 # Vim swap files
 *.swp
+server/secret_keys/asdemo_jwt256.key
+server/secret_keys/asdemo_jwt256.key.pub
