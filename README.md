@@ -12,7 +12,8 @@ $ npm run install
 # in case of errors with core-js please install core-js manually
 $ npm i -D core-js@2 @babel/runtime-corejs2
 
-# generate new certificates
+# generate new certificates. to do so - please run following command from app root
+$ mkdir server/secret_keys
 $ ssh-keygen -t rsa -b 4096 -m PEM -f server/secret_keys/asdemo_jwt256.key  
 $ openssl rsa -in server/secret_keys/asdemo_jwt256.key -pubout -outform PEM -out server/secret_keys/asdemo_jwt256.key.pub 
 
