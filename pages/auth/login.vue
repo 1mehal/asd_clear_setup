@@ -26,7 +26,7 @@
             </el-link>
           </el-form-item>
           <el-form-item v-if="error">
-            <el-alert :title="error" type="error" show-icon> </el-alert>
+            <el-alert :title="errorMessage" type="error" show-icon> </el-alert>
           </el-form-item>
           <el-form-item>
             <el-button @click="onSubmit" type="primary">Login</el-button>
@@ -48,6 +48,7 @@ export default {
         password: ''
       },
       error: false,
+      errorMessage: '',
       rules: {
         userName: [
           {
@@ -86,7 +87,8 @@ export default {
             this.$router.push('/')
           })
           .catch((error) => {
-            this.error = error.message
+            this.error = true
+            this.errorMessage = error.message
           })
       } catch (e) {
         this.error = e

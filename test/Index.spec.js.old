@@ -1,0 +1,47 @@
+import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
+import Vuex from 'vuex'
+import Index from '../pages/index'
+import ElementUI from 'element-ui'
+// import VueRouter from 'vue-router'
+
+const localVue = createLocalVue()
+localVue.use(Vuex)
+localVue.use(ElementUI)
+// localVue.use(VueRouter)
+// const router = new VueRouter()
+
+describe('Index page', () => {
+  let getters
+  let store
+
+  beforeEach(() => {
+    getters = {
+      currentUser: () => {
+        return {
+          username: 'testuu'
+        }
+      }
+    }
+
+    store = new Vuex.Store({
+      getters
+    })
+  })
+
+  describe('Index', () => {
+    // test('is a Vue instance', () => {
+    //   const wrapper = shallowMount(Index, { store, localVue })
+    //   expect(wrapper.isVueInstance()).toBeTruthy()
+    // })
+
+    // test('Register Button available', () => {
+    //   const wrapper = shallowMount(Index, { store, localVue })
+    //   expect(wrapper.text()).toContain('Register a new user')
+    // })
+
+    // test('Logout button available', () => {
+    //   const wrapper = shallowMount(Index, { store, localVue })
+    //   expect(wrapper.text()).toContain('Logout as testuu')
+    // })
+  })
+})
