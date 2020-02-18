@@ -31,7 +31,7 @@
             ></el-input>
           </el-form-item>
           <el-form-item v-if="error">
-            <el-alert :title="error" type="error" show-icon> </el-alert>
+            <el-alert :title="errorMessage" type="error" show-icon> </el-alert>
           </el-form-item>
           <el-form-item>
             <el-button @click="onSubmit" type="primary">
@@ -64,9 +64,7 @@ export default {
       }
     }
     const validatePasswordConfirmation = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please input the password again'))
-      } else if (value !== this.user.password) {
+      if (value !== this.user.password) {
         callback(new Error("Your confirmation don't match password!"))
       } else {
         callback()
@@ -79,6 +77,7 @@ export default {
         passwordConfirmation: ''
       },
       error: false,
+      errorMessage: '',
       rules: {
         userName: [
           {
@@ -132,7 +131,8 @@ export default {
               this.$router.push('/auth/login')
             })
             .catch((error) => {
-              this.error = error.message
+              this.error = true
+              this.errorMessage = error.message
             })
         }
       })

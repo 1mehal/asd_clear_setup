@@ -1,9 +1,7 @@
 const bcrypt = require('bcryptjs')
 const { AuthenticationError } = require('apollo-server')
-const { generateAuthorizationToken } = require('../auth-token-processing')
-// const validateAccessToken = require('../auth/validate-tokens.js')
-// const setTokens = require('../auth/set-tokens')
 const axios = require('axios')
+const { generateAuthorizationToken } = require('../auth-token-processing')
 
 const checkUserAuthorization = function(req) {
   if (!req.currentAuthorizedUserName) {

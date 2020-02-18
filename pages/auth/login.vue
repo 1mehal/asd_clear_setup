@@ -76,23 +76,19 @@ export default {
   },
   methods: {
     onSubmit() {
-      try {
-        this.$apollo
-          .mutate({
-            mutation: login,
-            variables: this.user
-          })
-          .then(({ data, errors }) => {
-            this.$apolloHelpers.onLogin(data.login.token)
-            this.$router.push('/')
-          })
-          .catch((error) => {
-            this.error = true
-            this.errorMessage = error.message
-          })
-      } catch (e) {
-        this.error = e
-      }
+      this.$apollo
+        .mutate({
+          mutation: login,
+          variables: this.user
+        })
+        .then(({ data, errors }) => {
+          this.$apolloHelpers.onLogin(data.login.token)
+          this.$router.push('/')
+        })
+        .catch((error) => {
+          this.error = true
+          this.errorMessage = error.message
+        })
     },
     onCancel() {
       this.$router.go(-1)

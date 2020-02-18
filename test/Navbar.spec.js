@@ -1,14 +1,11 @@
 import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Navbar from '../components/Navbar'
 import ElementUI from 'element-ui'
-// import VueRouter from 'vue-router'
+import Navbar from '../components/Navbar'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 localVue.use(ElementUI)
-// localVue.use(VueRouter)
-// const router = new VueRouter()
 
 describe('Navbar component', () => {
   let getters
@@ -67,11 +64,8 @@ describe('Navbar component', () => {
       }
       // TODO: test a router proper navigation
       const wrapper = mount(Navbar, config)
-      // const spy = jest.spyOn(config.mocks.$router, 'go')
-      // const spyL = jest.spyOn(config.mocks.$apolloHelpers, 'onLogout')
       wrapper.find('li.el-menu-item').trigger('click')
       expect(onLogoutMock).toHaveBeenCalled()
-      // expect(spy).toHaveBeenCalledWith('auth/login')
     })
   })
 })
