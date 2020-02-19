@@ -18,23 +18,32 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import currentUserRemoteGreeting from '../gql/currentUserRemoteGreeting'
+import CURRENT_USER_REMOTE_GREETING from '../gql/currentUserRemoteGreeting'
 
 export default {
-  computed: mapGetters(['currentUser']),
   auth_required: true,
   data() {
     return {
-      error: null
+      remoteGreeting: '',
+      error: ''
     }
   },
-  apollo: {
-    remoteGreeting: {
-      query: currentUserRemoteGreeting,
-      update: (data) => data.currentUserRemoteGreeting,
-      error(error) {
-        this.error = error.message
-      }
+  computed: mapGetters(['currentUser']),
+  created() {
+    this.loadRemoteGreetings()
+  },
+  methods: {
+    loadRemoteGreetings() {
+      this.$apollo
+        .query({
+          query: CURRENT_USER_REMOTE_GREETING
+        })
+        .then(({ data }) => {
+          this.remoteGreeting = data.currentUserRemoteGreeting
+        })
+        .catch((error) => {
+          this.error = error.message
+        })
     }
   }
 }

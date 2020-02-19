@@ -38,7 +38,7 @@
   </el-row>
 </template>
 <script>
-import login from '../../gql/login'
+import LOGIN from '../../gql/login'
 
 export default {
   data() {
@@ -78,7 +78,7 @@ export default {
     onSubmit() {
       this.$apollo
         .mutate({
-          mutation: login,
+          mutation: LOGIN,
           variables: this.user
         })
         .then(({ data, errors }) => {

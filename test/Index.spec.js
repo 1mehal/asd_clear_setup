@@ -22,7 +22,7 @@ describe('Index Page tests', () => {
     getters
   })
 
-  const querySuccessfull = jest.fn().mockResolvedValue({
+  const querySuccessfullMock = jest.fn().mockResolvedValue({
     data: {
       remoteGreeting: {
         message: 'Dear, tabu2, greetings from far far away rust server'
@@ -30,51 +30,63 @@ describe('Index Page tests', () => {
     }
   })
 
-  describe('Index succesfull render', () => {
-    const config = {
-      mocks: {
-        $apollo: {
-          query: querySuccessfull
-        }
-      },
-      data() {
-        return {
+  const queryErrorMock = jest.fn().mockResolvedValue({
+    error: 'Could not connect to the server.'
+  })
+
+  describe('Index test', () => {
+    describe('Rendered greeting propertly', () => {
+      const config = {
+        mocks: {
+          $apollo: {
+            query: querySuccessfullMock
+          }
+        },
+        store,
+        localVue
+      }
+
+      const wrapper = mount(Index, config)
+      test('Greetings message showed, successfully', async () => {
+        expect(querySuccessfullMock).toHaveBeenCalled()
+        await querySuccessfullMock
+        wrapper.setData({
           remoteGreeting: {
             message: 'Dear, tabu2, greetings from far far away rust server'
-          }
-        }
-      },
-      store,
-      localVue
-    }
-
-    const wrapper = mount(Index, config)
-
-    test('Greetings message showed, successfully', () => {
-      expect(wrapper.find('.el-card__body').text()).toEqual(
-        'Dear, tabu2, greetings from far far away rust server'
-      )
+          },
+          error: null
+        })
+        await Vue.nextTick()
+        expect(wrapper.find('.el-card__body').text()).toEqual(
+          'Dear, tabu2, greetings from far far away rust server'
+        )
+      })
     })
 
-    test('Login button works, error rendered', async () => {
-      wrapper.setData({
-        remoteGreeting: null,
-        error: 'Could not connect to the server.'
+    describe('Rendered error propertly', () => {
+      const config = {
+        mocks: {
+          $apollo: {
+            query: queryErrorMock
+          }
+        },
+        store,
+        localVue
+      }
+
+      const wrapper = mount(Index, config)
+      test('Greetings error showed, successfully', async () => {
+        expect(queryErrorMock).toHaveBeenCalled()
+        await queryErrorMock
+        wrapper.setData({
+          remoteGreeting: null,
+          error: 'Could not connect to the server.'
+        })
+        await Vue.nextTick()
+        expect(wrapper.find('.el-alert__content').text()).toEqual(
+          'Could not connect to the server.'
+        )
       })
-      // FIXME: function doesn't test error handling sent from graphql
-      wrapper.vm.$options.apollo.remoteGreeting.error({
-        message: 'Could not connect to the server.'
-      })
-      // FIXME: function doesn't test data handling sent from graphql
-      wrapper.vm.$options.apollo.remoteGreeting.update({
-        remoteGreeting: {
-          message: 'Dear, tabu2, greetings from far far away rust server'
-        }
-      })
-      await Vue.nextTick()
-      expect(wrapper.find('.el-alert__content').text()).toEqual(
-        'Could not connect to the server.'
-      )
     })
   })
 })

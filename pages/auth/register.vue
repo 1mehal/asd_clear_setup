@@ -45,7 +45,7 @@
   </el-row>
 </template>
 <script>
-import createUser from '../../gql/createUser'
+import CREATE_USER from '../../gql/createUser'
 
 export default {
   data() {
@@ -56,8 +56,7 @@ export default {
         callback(new Error('Password should contain a lowercase letter'))
       } else if (!/[A-Z]/.test(value)) {
         callback(new Error('Password should contain an uppercase letter'))
-        // eslint-disable-next-line no-useless-escape
-      } else if (!/[!@#\$%\^\&*\)\(+=._-]/.test(value)) {
+      } else if (!/[!@#$%^&*)(+=._-]/.test(value)) {
         callback(new Error('Password should contain a special symbol'))
       } else {
         callback()
@@ -119,7 +118,7 @@ export default {
         if (valid) {
           this.$apollo
             .mutate({
-              mutation: createUser,
+              mutation: CREATE_USER,
               variables: this.user
             })
             .then(({ data }) => {
