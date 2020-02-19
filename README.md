@@ -18,9 +18,9 @@ $ mkdir server/secret_keys
 $ ssh-keygen -t rsa -b 4096 -m PEM -f server/secret_keys/asdemo_jwt256.key  
 $ openssl rsa -in server/secret_keys/asdemo_jwt256.key -pubout -outform PEM -out server/secret_keys/asdemo_jwt256.key.pub 
 
-> Follow <https://github.com/1mehal/rust_simple_server> get local rust server running to respond with customized greetings over REST 
+# Follow <https://github.com/1mehal/rust_simple_server> to get local rust server running to respond with customized greetings over REST 
 
-> return to 'asd_clear_setup' folder and serve app
+# return to 'asd_clear_setup' folder and serve app
 # serve with hot reload at localhost:3000
 $ npm run dev
 
