@@ -10,12 +10,14 @@
           <el-form-item prop="username" label="User Name" required>
             <el-input
               v-model="user.username"
+              @keyup.enter.native="onSubmit"
               prefix-icon="el-icon-user"
             ></el-input>
           </el-form-item>
           <el-form-item prop="password" label="Password" required>
             <el-input
               v-model="user.password"
+              @keyup.enter.native="onSubmit"
               prefix-icon="el-icon-key"
               show-password
             ></el-input>
