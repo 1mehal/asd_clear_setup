@@ -1,7 +1,12 @@
 # magic_login_app
 
 Test project to demonstrate project structure for a web application wich securilly communicates with a REST server 
-Project works 
+
+To run the project, you have to install and run two projects:
+1.  <https://github.com/1mehal/asd_clear_setup> - NuxtJS based Web Application
+2.  <https://github.com/1mehal/rust_simple_server> - RocketRS based REST server
+
+Please follow the instructions bellow
 
 ## Build Setup
 
