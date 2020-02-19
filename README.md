@@ -1,6 +1,7 @@
 # magic_login_app
 
 > Test app for an amazing opportunity
+> Project works 
 
 ## Build Setup
 
@@ -18,9 +19,11 @@ $ mkdir server/secret_keys
 $ ssh-keygen -t rsa -b 4096 -m PEM -f server/secret_keys/asdemo_jwt256.key  
 $ openssl rsa -in server/secret_keys/asdemo_jwt256.key -pubout -outform PEM -out server/secret_keys/asdemo_jwt256.key.pub 
 
-# Follow <https://github.com/1mehal/rust_simple_server> to get local rust server running to respond with customized greetings over REST 
 
-# return to 'asd_clear_setup' folder and serve app
+```
+> At this stage to receive a remote greeting from REST server please follow instruction at <https://github.com/1mehal/rust_simple_server>
+
+``` bash
 # serve with hot reload at localhost:3000
 $ npm run dev
 
